@@ -1,0 +1,74 @@
+<form [formGroup]="userForm">
+  <label for="email">Email: </label>
+  <input
+    id="email"
+    type="email"
+    formControlName="email"
+    required
+    placeholder="ex.: jeca@gmail.com"
+  /><br />
+  <div
+    *ngIf="
+      (userForm.get('email').invalid && userForm.get('email').touched) ||
+      userForm.get('email').dirty
+    "
+  >
+    <p class="text-danger" *ngIf="userForm.get('email').errors?.required">
+      Email address is required!
+    </p>
+    <p class="text-danger" *ngIf="userForm.get('email').errors?.pattern">
+      Email address is invalid!
+    </p>
+  </div>
+  <label for="password">Password: </label>
+  <input
+    id="password"
+    type="password"
+    formControlName="password"
+    required
+  /><br />
+  <div
+    *ngIf="
+      (userForm.get('password').invalid && userForm.get('password').touched) ||
+      userForm.get('password').dirty
+    "
+  >
+    <p class="text-danger" *ngIf="userForm.get('password').errors?.required">
+      Password is required!
+    </p>
+    <p class="text-danger" *ngIf="userForm.get('password').errors?.pattern">
+      Pasword is invalid!
+    </p>
+  </div>
+  <label for="confirmPassword">Confirm password: </label>
+  <input
+    id="confirmPassword"
+    type="password"
+    formControlName="confirmPassword"
+    required
+  />
+  <div
+    *ngIf="
+      (userForm.get('confirmPassword').invalid &&
+        userForm.get('confirmPassword').touched) ||
+      userForm.get('confirmPassword').dirty
+    "
+  >
+    <p
+      class="text-danger"
+      *ngIf="userForm.get('confirmPassword').errors?.required"
+    >
+      Password is required!
+    </p>
+    <p
+      class="text-danger"
+      *ngIf="userForm.get('confirmPassword').errors?.pattern"
+    >
+      Pasword is invalid!
+    </p>
+  </div>
+</form>
+
+<button type="submit" [disabled]="!userForm.valid" (click)="onSubmit()">
+  Submit
+</button>
